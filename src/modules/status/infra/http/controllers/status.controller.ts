@@ -1,9 +1,17 @@
 import type { Request, Response } from 'express';
+import { transporter } from '../../../../../services/mail';
 
 export class StatusController {
   public async show(req: Request, res: Response) {
     void req;
     res.status(200);
+    transporter.verify(function (error) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log('Server is ready to take our messages');
+      }
+    });
     res.json({
       status: 'online',
       date: new Date(),

@@ -7,13 +7,10 @@ export class RecoveryController {
     const to = req.body.to?.toString();
     const pin = req.body.pin?.toString();
 
-    console.log({ name, pin, to });
-
     if (pin && to) {
-      sendMail(name, to, pin).then((info) => {
-        console.log('Message sent successfully as %s', info.messageId);
-      });
+      const info = await sendMail(name, to, pin);
 
+      console.log('Message sent successfully as %s', info.messageId);
       res.status(200);
       res.json({ status: true });
     } else {
