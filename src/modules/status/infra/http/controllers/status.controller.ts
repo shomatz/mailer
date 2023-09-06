@@ -1,10 +1,12 @@
 import type { Request, Response } from 'express';
-import { transporter } from '../../../../../services/mail';
+import { MAIL_CONFIG, transporter } from '../../../../../services/mail';
 
 export class StatusController {
   public async show(req: Request, res: Response) {
     void req;
     res.status(200);
+    console.log(MAIL_CONFIG);
+
     transporter.verify(function (error) {
       if (error) {
         console.log(error);
